@@ -14,7 +14,7 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 
 
-def generate_twin_moons(n_points, separation=0.5, width=0.6, height=0.2):
+def generate_twin_moons(n_points, noise=0.1, separation=0.5, width=0.6, height=0.2):
     n_points_per_moon = n_points // 2
 
     outer_circ_x = np.cos(np.linspace(0, np.pi, n_points_per_moon))
@@ -22,12 +22,9 @@ def generate_twin_moons(n_points, separation=0.5, width=0.6, height=0.2):
     inner_circ_x = 1 - np.cos(np.linspace(0, np.pi, n_points_per_moon))
     inner_circ_y = 1 - np.sin(np.linspace(0, np.pi, n_points_per_moon)) - 0.5
 
-    x = np.vstack(
-        [np.append(outer_circ_x, inner_circ_x), np.append(outer_circ_y, inner_circ_y)]
-    ).T
-    y = np.hstack(
-        [np.zeros(n_points_per_moon, dtype=np.intp), np.ones(n_points_per_moon, dtype=np.intp)]
-    )
+    # Combine and add random noise
+    x = np.concatenate([outer_circ_x, inner_circ_x]) + np.random.normal(0, noise, n_points)
+    y = np.concatenate([outer_circ_y, inner_circ_y]) + np.random.normal(0, noise, n_points)
     labels = np.array([0] * n_points_per_moon + [1] * n_points_per_moon)
 
     return x, y, labels
@@ -35,14 +32,17 @@ def generate_twin_moons(n_points, separation=0.5, width=0.6, height=0.2):
 # Slider for number of points
 num_points = st.slider("Number of points in dataset", 100, 2000, 1100)
 
-# Generate data
-x, y, labels = generate_twin_moons(num_points)
+# Slider for noise level
+noise_level = st.slider("Noise level", 0.0, 0.5, 0.1)
 
-# Create a DataFrame
+# Generate data
+x, y, labels = generate_twin_moons(num_points, noise=noise_level)
+
+# Create DataFrame
 df = pd.DataFrame({
-    "x": x[:, 0],
-    "y": x[:, 1],
-    "label": y
+    "x": x,
+    "y": y,
+    "label": labels
 })
 
 # Visualization
@@ -51,6 +51,6 @@ st.altair_chart(alt.Chart(df, height=700, width=700)
     .encode(
         x=alt.X("x", axis=None),
         y=alt.Y("y", axis=None),
-        color=alt.Color("label:N", legend=None),  # Use label for color encoding
+        color=alt.Color("label:N", legend=None),
         tooltip=['x', 'y', 'label']  # Optional: add tooltip for more interactivity
     ))
