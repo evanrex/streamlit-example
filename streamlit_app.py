@@ -15,7 +15,7 @@ This follows the [sci-kit learn implemention](https://scikit-learn.org/stable/mo
 
 
 def generate_twin_moons(n_points, noise=0.1, separation=0.5, width=0.6, height=0.2):
-    n_points_per_moon = n_points // 2
+    n_points_per_moon = n_points 
 
     outer_circ_x = np.cos(np.linspace(0, np.pi, n_points_per_moon))
     outer_circ_y = np.sin(np.linspace(0, np.pi, n_points_per_moon))
@@ -30,7 +30,7 @@ def generate_twin_moons(n_points, noise=0.1, separation=0.5, width=0.6, height=0
     return x, y, labels
 
 # Slider for number of points
-num_points = st.slider("Number of points in dataset", 100, 2000, 1100)
+num_points = st.slider("Number of points per moon in dataset", 100, 2000, 1100)
 
 # Slider for noise level
 noise_level = st.slider("Noise level", 0.0, 0.5, 0.1)
