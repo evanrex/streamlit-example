@@ -23,8 +23,10 @@ def generate_twin_moons(n_points, noise=0.1, separation=0.5, width=0.6, height=0
     inner_circ_y = 1 - np.sin(np.linspace(0, np.pi, n_points_per_moon)) - 0.5
 
     # Combine and add random noise
-    x = np.concatenate([outer_circ_x, inner_circ_x]) + np.random.normal(0, noise, n_points)
-    y = np.concatenate([outer_circ_y, inner_circ_y]) + np.random.normal(0, noise, n_points)
+    x = np.concatenate([outer_circ_x, inner_circ_x])
+    x += np.random.normal(0, noise, len(x))
+    y = np.concatenate([outer_circ_y, inner_circ_y]) 
+    y += np.random.normal(0, noise, len(y))
     labels = np.array([0] * n_points_per_moon + [1] * n_points_per_moon)
 
     return x, y, labels
