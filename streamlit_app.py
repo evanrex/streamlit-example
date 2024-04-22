@@ -4,7 +4,7 @@ import numpy as np
 import altair as alt
 
 """
-# Welcome to the Two Moons visualisation with Streamlit!
+# Welcome to the Two Moons visualisation with Streamlit ()!
 
 
 Explore the Two Moons dataset by adjusting the noise and number of points.
