@@ -30,7 +30,7 @@ def generate_twin_moons(n_points, noise=0.1, separation=0.5, width=0.6, height=0
     return x, y, labels
 
 # Slider for number of points
-num_points = st.slider("Number of points per moon in dataset", 100, 2000, 1100)
+num_points = st.slider("Number of points per moon in dataset", 100, 2000, 1100, step=2)
 
 # Slider for noise level
 noise_level = st.slider("Noise level", 0.0, 0.5, 0.1)
