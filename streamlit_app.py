@@ -26,7 +26,7 @@ def generate_twin_moons(n_points, separation=0.5, width=0.6, height=0.2):
         [np.append(outer_circ_x, inner_circ_x), np.append(outer_circ_y, inner_circ_y)]
     ).T
     y = np.hstack(
-        [np.zeros(n_samples_out, dtype=np.intp), np.ones(n_samples_in, dtype=np.intp)]
+        [np.zeros(n_points_per_moon, dtype=np.intp), np.ones(n_points_per_moon, dtype=np.intp)]
     )
     labels = np.array([0] * n_points_per_moon + [1] * n_points_per_moon)
 
