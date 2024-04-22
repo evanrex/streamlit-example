@@ -15,11 +15,30 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 
 
-# Slider for number of points
-num_points = st.slider("Number of points in dataset", 100, 10000, 1100)
+def generate_twin_moons(n_points, separation=0.5, width=0.6, height=0.2):
+    n_points_per_moon = n_points // 2
 
-# Load the twin moons dataset
-x, y = make_moons(n_samples=num_points, noise=0.1)
+    # First moon
+    t = np.linspace(0, np.pi, n_points_per_moon)
+    x1 = width * np.sin(t)
+    y1 = height * np.cos(t) + separation
+
+    # Second moon
+    x2 = width * np.sin(t) + width
+    y2 = -height * np.cos(t) - separation
+
+    # Combine into arrays
+    x = np.concatenate([x1, x2])
+    y = np.concatenate([y1, y2])
+    labels = np.array([0] * n_points_per_moon + [1] * n_points_per_moon)
+
+    return x, y, labels
+
+# Slider for number of points
+num_points = st.slider("Number of points in dataset", 100, 2000, 1100)
+
+# Generate data
+x, y, labels = generate_twin_moons(num_points)
 
 # Create a DataFrame
 df = pd.DataFrame({
