@@ -4,13 +4,13 @@ import numpy as np
 import altair as alt
 
 """
-# Welcome to Streamlit!
+# Welcome to the Two Moons visualisation Streamlit!
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire :heart:.
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
 
-In the meantime, below is an example of what you can do with just a few lines of code:
+Explore the Two Moons dataset by adjusting the noise and number of points.
+
+This follows the [sci-kit learn implemention](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html#sklearn-datasets-make-moons).
+
 """
 
 
