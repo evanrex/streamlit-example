@@ -17,18 +17,17 @@ In the meantime, below is an example of what you can do with just a few lines of
 def generate_twin_moons(n_points, separation=0.5, width=0.6, height=0.2):
     n_points_per_moon = n_points // 2
 
-    # First moon
-    t = np.linspace(0, np.pi, n_points_per_moon)
-    x1 = width * np.sin(t)
-    y1 = height * np.cos(t) + separation
+    outer_circ_x = np.cos(np.linspace(0, np.pi, n_points_per_moon))
+    outer_circ_y = np.sin(np.linspace(0, np.pi, n_points_per_moon))
+    inner_circ_x = 1 - np.cos(np.linspace(0, np.pi, n_points_per_moon))
+    inner_circ_y = 1 - np.sin(np.linspace(0, np.pi, n_points_per_moon)) - 0.5
 
-    # Second moon
-    x2 = width * np.sin(t) + width
-    y2 = -height * np.cos(t) - separation
-
-    # Combine into arrays
-    x = np.concatenate([x1, x2])
-    y = np.concatenate([y1, y2])
+    x = np.vstack(
+        [np.append(outer_circ_x, inner_circ_x), np.append(outer_circ_y, inner_circ_y)]
+    ).T
+    y = np.hstack(
+        [np.zeros(n_samples_out, dtype=np.intp), np.ones(n_samples_in, dtype=np.intp)]
+    )
     labels = np.array([0] * n_points_per_moon + [1] * n_points_per_moon)
 
     return x, y, labels
