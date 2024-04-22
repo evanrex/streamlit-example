@@ -38,11 +38,11 @@ num_points = st.slider("Number of points in dataset", 100, 2000, 1100)
 # Generate data
 x, y, labels = generate_twin_moons(num_points)
 
-# Create DataFrame
+# Create a DataFrame
 df = pd.DataFrame({
-    "x": x,
-    "y": y,
-    "label": labels
+    "x": x[:, 0],
+    "y": x[:, 1],
+    "label": y
 })
 
 # Visualization
@@ -51,6 +51,6 @@ st.altair_chart(alt.Chart(df, height=700, width=700)
     .encode(
         x=alt.X("x", axis=None),
         y=alt.Y("y", axis=None),
-        color=alt.Color("label:N", legend=None),
+        color=alt.Color("label:N", legend=None),  # Use label for color encoding
         tooltip=['x', 'y', 'label']  # Optional: add tooltip for more interactivity
     ))
