@@ -1,6 +1,9 @@
-# Welcome to Streamlit!
+"""
+# Welcome to the Two Moons visualisation with Streamlit!
 
-Edit `/streamlit_app.py` to customize this app to your heart's desire. :heart:
 
-If you have any questions, checkout our [documentation](https://docs.streamlit.io) and [community
-forums](https://discuss.streamlit.io).
+Explore the Two Moons dataset by adjusting the noise and number of points.
+
+This follows the [sci-kit learn implemention](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html#sklearn-datasets-make-moons).
+
+"""
