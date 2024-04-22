@@ -2,7 +2,6 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import altair as alt
-from sklearn.datasets import make_moons
 
 """
 # Welcome to Streamlit!
